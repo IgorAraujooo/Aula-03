@@ -1,9 +1,9 @@
-/****************************************************************************************************************************************************
-* Objetivo: Calcular a média de um aluno com base em 4 notas
-* Data: 04/08/2023
-* Autor: Igor Araujo
-* Versão: 1.0
-****************************************************************************************************************************************************/
+/***********************************************************************************************************************************
+ * Objetivo: Calcular a média do usuário                                                                                           *
+ * Data: 04/08/23                                                                                                                  *
+ * Autor: Igor Araujo                                                                                                              *
+ * Versão: 1.0                                                                                                                     * 
+ ***********************************************************************************************************************************/
 
 /****************************************************************************************************************************************************
 * Formas de criar variaveis e constantes
@@ -32,60 +32,73 @@
 *
 ****************************************************************************************************************************************************/
 
-
-//Import da biblioteca de entrada de dados via teclado
+// Import da biblioteca de entrada de dados via teclado
 var readline = require('readline')
 
-//Cria o elemento de entrada de dados para digitação com usuário
+// Criando um objeto entradaDeDados para ser uma referencia da bibliteca READLINE
 var entradaDeDados = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 })
 
-entradaDeDados.question('Qual o seu nome? ', function(nomeAluno){
 
-    let nome = nomeAluno
 
-    entradaDeDados.question('Digite a sua primeira nota: ', function(n1){
+entradaDeDados.question('Digite seu nome: ', function (nomeUsuario) {
+    var nome = nomeUsuario
 
-        //Convertendo String para Number
-        let nota1 = Number(n1, 10)
+    entradaDeDados.question('Qual a sua primeira nota: ', function (primeiraNota) {
+        var nota1 = primeiraNota.replace(',', '.')
 
-        entradaDeDados.question('Digite a sua segunda nota: ', function(n2){
+        entradaDeDados.question('Qual a sua segunda nota: ', function (segundaNota) {
+            var nota2 = segundaNota.replace(',', '.')
 
-            let nota2 = Number(n2, 10)
-    
-            entradaDeDados.question('Digite a sua terceira nota: ', function(n3){
+            entradaDeDados.question('Qual a sua terceira nota: ', function (terceiraNota) {
+                var nota3 = terceiraNota.replace(',', '.')
 
-                let nota3 = Number(n3, 10)
-        
-                entradaDeDados.question('Digite a sua quarta nota: ', function(n4){
+                entradaDeDados.question('Qual a sua quarta nota: ', function (quartaNota) {
+                    var nota4 = quartaNota.replace(',', '.')
 
-                    let nota4 = Number(n4, 10)
+                    var number1 = parseInt(nota1)
+                    var number2 = parseInt(nota2)
+                    var number3 = parseInt(nota3)
+                    var number4 = parseInt(nota4)
 
-                    // Validação para entrada de dados vazia 
-                    if(nota1 == '' || nota2 == '' || nota3 == '' || nota4 == ''){
 
-                        console.log('ERRO: É obrigatório informar todas as notas')
+                    if (nota1 == '' || nota2 == '' || nota3 == '' || nota4 == '') {
+                        console.log("ERRO: é obrigatorio informar todas as notas")
 
-                    }else{
-                        
-                        let media = (nota1 + nota2 + nota3 + nota4)/4
+                        // Validação para entrada de dados não númericos
+                        // isNan () - Verifica se a variavel não é um número
+                    } else if (isNaN(nota1) || isNaN(nota2) || isNaN(nota3) || isNaN(nota4)) {
 
-                        //Exibindo a média com apenas uma casa decimal.
-                        console.log(`Olá ${nome}, sua média é ${media.toFixed(1)} `)
+                        console.log("ERRO: é obrigatorio entrada de dados só com números")
 
+
+                    } else if (nota1 > 10 || nota2 > 10 || nota3 > 10 || nota4 > 10 || nota1 < 0 || nota2 < 0 || nota3 < 0 || nota4 < 0) {
+                        console.log("Informar apenas números entre 0 e 10")
+
+                    } else {
+                        var media = (Number(number1) + Number(number2) + Number(number3) + Number(number4)) / 4
+
+                        // Usar parseint para transformar string em int
+                        console.log("      ")
+
+                        // toUpperCase é utilizado para devolver o texto escrito em maisculo 
+                        console.log('Bem vindo ' + nome.toUpperCase())
+                        console.log('Primeira nota: ' + nota1)
+                        console.log('Segunda nota: ' + nota2)
+                        console.log('Terceira nota: ' + nota3)
+                        console.log('Quarta nota: ' + nota4)
+
+                        // toFixed permite ajustar a quantidade de casas decimais 
+                        console.log('Sua média é: ' + media.toFixed(1).replace(',', '.'))
                     }
 
-                    //Encerra o processamento de entrada de dados
-                    entradaDeDados.close()
+
+
 
                 })
-
             })
-
         })
-
     })
-
 })
