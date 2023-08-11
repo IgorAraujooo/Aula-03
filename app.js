@@ -1,55 +1,91 @@
-/***********************************************************************************************************************************
- * Objetivo: Calcular a média do usuário                                                                                                        *
- * Data: 04/08/23                                                                                                                  *
- * Autor: Igor                                                                                                                *
- * Versão: 1.0                                                                                                                     * 
- ***********************************************************************************************************************************/
+/****************************************************************************************************************************************************
+* Objetivo: Calcular a média de um aluno com base em 4 notas
+* Data: 04/08/2023
+* Autor: Igor Araujo
+* Versão: 1.0
+****************************************************************************************************************************************************/
 
-// Import da biblioteca de entrada de dados via teclado
+/****************************************************************************************************************************************************
+* Formas de criar variaveis e constantes
+*
+* var - permite criar uma variável de escopo global, ou seja, irá existir em todo o projeto
+* let - permite criar uma variável de escopo local, ou seja, irá existir apenas naquele bloco
+* const - permite criar uma constante, que pode ser de escopo local ou global. Sempre utilizamos em situações onde não haverá mudança de conteúdo
+*
+* Operadores de Comparação
+*
+* ==   - Comparação de conteúdo 
+* !=   - Diferença
+* >    - Maior que
+* <    - Menor que
+* >=   - Maior ou igual que 
+* <=   - Menor ou igual que
+* ===  - Comparação de conteúdos e dados iguais
+* !==  - Comparação de conteúdos diferentes e dados iguais
+* ==!  - Comparação de conteúdos iguais e tipos diferentes
+*
+* Operadores Lógicos
+*
+* E       -  AND - &&
+* OU      -  0R  - ||
+* NEGAÇÃO -  NOT - !
+*
+****************************************************************************************************************************************************/
+
+
+//Import da biblioteca de entrada de dados via teclado
 var readline = require('readline')
 
-// Criando um objeto entradaDeDados para ser uma referencia da bibliteca READLINE
+//Cria o elemento de entrada de dados para digitação com usuário
 var entradaDeDados = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 })
 
+entradaDeDados.question('Qual o seu nome? ', function(nomeAluno){
 
+    let nome = nomeAluno
 
-entradaDeDados.question('Digite seu nome: ', function (nomeUsuario) {
-    var nome = nomeUsuario
+    entradaDeDados.question('Digite a sua primeira nota: ', function(n1){
 
-    entradaDeDados.question('A sua primeira nota é: ', function (primeiraNota) {
-        var nota1 = primeiraNota
+        //Convertendo String para Number
+        let nota1 = Number(n1, 10)
 
-        entradaDeDados.question('A sua segunda nota é: ', function (segundaNota) {
-            var nota2 = segundaNota
+        entradaDeDados.question('Digite a sua segunda nota: ', function(n2){
 
-            entradaDeDados.question('A sua terceira nota é: ', function (terceiraNota) {
-                var nota3 = terceiraNota
+            let nota2 = Number(n2, 10)
+    
+            entradaDeDados.question('Digite a sua terceira nota: ', function(n3){
 
-                entradaDeDados.question('A sua quarta nota é: ', function (quartaNota) {
-                    var nota4 = quartaNota
+                let nota3 = Number(n3, 10)
+        
+                entradaDeDados.question('Digite a sua quarta nota: ', function(n4){
 
-                    // Usar parseint para transformar string em int
-                    var number1 = parseInt(nota1)
-                    var number2 = parseInt(nota2)
-                    var number3 = parseInt(nota3)
-                    var number4 = parseInt(nota4)
+                    let nota4 = Number(n4, 10)
 
-                    var media = (number1 + number2 + number3 + number4) / 4
+                    // Verificando se todas as notas foram digitadas
+                    if(nota1 == '' || nota2 == '' || nota3 == '' || nota4 == ''){
 
+                        console.log('ERRO: É obrigatório informar todas as notas')
 
+                    }else{
+                        
+                        let media = (nota1 + nota2 + nota3 + nota4)/4
 
-                    console.log("      ")
-                    console.log('Bem vindo,  ' + nome)
-                    console.log('Nota 1: ' + nota1)
-                    console.log('Nota 2: ' + nota2)
-                    console.log('Nota 3: ' + nota3)
-                    console.log('Nota 4: ' + nota4)
-                    console.log('Sua média é: ' + media)
+                        //Exibindo a média com apenas uma casa decimal.
+                        console.log(`Olá ${nome}, sua média é ${media.toFixed(1)} `)
+
+                    }
+
+                    //Encerra o processamento de entrada de dados
+                    entradaDeDados.close()
+
                 })
+
             })
+
         })
+
     })
+
 })
