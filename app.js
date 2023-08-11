@@ -63,7 +63,7 @@ entradaDeDados.question('Qual o seu nome? ', function(nomeAluno){
 
                     let nota4 = Number(n4, 10)
 
-                    // Verificando se todas as notas foram digitadas
+                    // Validação para entrada de dados vazia 
                     if(nota1 == '' || nota2 == '' || nota3 == '' || nota4 == ''){
 
                         console.log('ERRO: É obrigatório informar todas as notas')
